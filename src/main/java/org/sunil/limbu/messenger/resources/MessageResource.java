@@ -16,17 +16,17 @@ import org.sunil.limbu.messenger.model.Message;
 import org.sunil.limbu.messenger.service.MessageService;
 
 @Path("/messages")
+@Produces(MediaType.APPLICATION_JSON)
+@Consumes(MediaType.APPLICATION_JSON)
 public class MessageResource {
 	MessageService messageService = new MessageService();
 	
 	@GET
-	@Produces(MediaType.APPLICATION_JSON)
 	public List<Message> getMessages(){
 		return messageService.getAllMessages();
 	}
 	
 	@GET
-	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/{messageId}")
 	public Message getMessage(@PathParam("messageId") long messageId){
 		return messageService.getMessage(messageId);
@@ -34,14 +34,11 @@ public class MessageResource {
 	
 	
 	@POST
-	@Produces(MediaType.APPLICATION_JSON)
-	@Consumes(MediaType.APPLICATION_JSON)
 	public Message addMessage(Message message){
 		return messageService.addMessage(message);
 	}
 	
-	@Produces(MediaType.APPLICATION_JSON)
-	@Consumes(MediaType.APPLICATION_JSON)
+	
 	@PUT
 	@Path("/{messageId}")
 	public Message updateMessage(@PathParam("messageId") long messageId, Message message){
@@ -50,8 +47,6 @@ public class MessageResource {
 	}
 	
 	@DELETE
-	@Produces(MediaType.APPLICATION_JSON)
-	@Consumes(MediaType.APPLICATION_JSON)
 	@Path("/{messageId}")
 	public Message removeMessage(@PathParam("messageId") long messageId){
 		return messageService.removeMessage(messageId);
